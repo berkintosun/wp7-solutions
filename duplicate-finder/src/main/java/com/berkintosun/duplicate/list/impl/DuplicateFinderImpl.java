@@ -16,14 +16,14 @@ import java.util.*;
 public class DuplicateFinderImpl<T> implements DuplicateFinder<List<T>> {
     /**
      * Finds and returns a list of duplicate elements from the input list, maintaining the order in which they
-     * first appeared in the original list.
+     * first appeared in the original list. It uses O(N) memory and process it with O(N) time.
      *
      * <p>If the input list is {@code null}, an {@link IllegalArgumentException} is thrown.</p>
      *
      * <p>The returned list contains each duplicate element exactly once, even if it appears multiple times
      * in the input list.</p>
      * <p>Example usage:</p>
-     *  <pre>
+     * <pre>
      *   DuplicateFinder<List<String>> duplicateFinder = new DuplicateFinderImpl<>();
      *   List<String> input = Arrays.asList("b", "a", "c", "c", "e", "a", "c", "d", "c", "d");
      *   List<String> duplicates = duplicateFinder.findDuplicates(input);
