@@ -15,11 +15,7 @@ public class DuplicateFinderImpl<T> implements DuplicateFinder<List<T>> {
         List<T> result = new ArrayList<>();
 
         for (T item : inputList) {
-            if (countMap.containsKey(item)) {
-                countMap.put(item, 1 + countMap.get(item));
-            } else {
-                countMap.put(item, 1);
-            }
+            countMap.merge(item, 1, Integer::sum);
         }
 
         for (T item : inputList) {
