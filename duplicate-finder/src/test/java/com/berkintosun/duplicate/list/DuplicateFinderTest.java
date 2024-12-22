@@ -60,4 +60,13 @@ class DuplicateFinderTest {
     void testNullArray() {
         assertThrows(IllegalArgumentException.class, () -> new DuplicateFinderImpl<>().findDuplicates(null));
     }
+
+    @Test
+    @DisplayName("Test null values should be preserved")
+    void testDataWithNullValues() {
+        List<String> input = Arrays.asList("1", null, "3", null, "3", "1","2");
+        DuplicateFinder<List<String>> finder = new DuplicateFinderImpl<>();
+        List<String> expected = Arrays.asList("1", null, "3");
+        assertEquals(expected, finder.findDuplicates(input));
+    }
 }
