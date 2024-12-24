@@ -4,12 +4,17 @@ import com.berkintosun.spreadsheet.api.Spreadsheet;
 import com.berkintosun.spreadsheet.api.ValueType;
 
 import java.util.Map;
+import java.util.function.Function;
 
 public class ValueProcessor {
     Spreadsheet spreadsheet;
 
     Map<Character, ValueType> specialCharacters = Map.of(
             '=', ValueType.FORMULA
+    );
+
+    Map<Function<String, Boolean>, Function<String, String>> preProcessMap = Map.of(
+            (s -> getValueType(s.trim()) == ValueType.INTEGER), (String::trim)
     );
 
     public ValueProcessor(Spreadsheet spreadsheet) {
@@ -38,11 +43,11 @@ public class ValueProcessor {
         return isInteger ? ValueType.INTEGER : ValueType.STRING;
     }
 
-    public String preProcess(String value){
-        String trimmedStr = value.trim();
-        
-        if(getValueType(trimmedStr) == ValueType.INTEGER){
-            return trimmedStr;
+    public String preProcess(String value) {
+        for (Map.Entry<Function<String, Boolean>, Function<String, String>> entry : preProcessMap.entrySet()) {
+            if (entry.getKey().apply(value)) {
+                value = entry.getValue().apply(value);
+            }
         }
         return value;
     }
