@@ -1,6 +1,8 @@
 import com.berkintosun.spreadsheet.api.ValueType;
 import com.berkintosun.spreadsheet.engine.Office;
 import com.berkintosun.spreadsheet.engine.SpreadsheetImpl;
+import com.berkintosun.spreadsheet.export.string.DashSpreadsheetExporter;
+import com.berkintosun.spreadsheet.export.string.StarSpreadsheetExporter;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -16,8 +18,6 @@ public class Question {
     public void setup() {
         int rows = 10;
         int columns = 5;
-        //QUESTION: Why use implementation directly in this test instead of an interface
-        // as the name hints that there must be an interface for it?
         sheet = Office.newSpreadsheet(rows, columns);
     }
 
@@ -73,5 +73,40 @@ public class Question {
         // But string cells stay as they are
         sheet.put(2, 2, "     foo ");
         Assert.assertEquals("     foo ", sheet.get(2, 2));
+    }
+
+    @Test
+    public void differentExportOptionsAreProvided() {
+        sheet.put(0, 0, "a");
+        sheet.put(1, 1, "b");
+        sheet.put(2, 2, "c");
+        sheet.put(3, 3, "d");
+        sheet.put(3, 4, "e");
+
+        Assert.assertEquals("10,5#" // Line breaks added for readability. There are no "\n" in the String
+                        + "a-----" // 0
+                        + "-b----" // 1
+                        + "--c---" // 2
+                        + "---d-e-" // 3
+                        + "-----" // 4
+                        + "-----" // 5
+                        + "-----" // 6
+                        + "-----" // 7
+                        + "-----" // 8
+                        + "-----" // 9
+                , new DashSpreadsheetExporter(sheet).export());
+
+        Assert.assertEquals("10,5#" // Line breaks added for readability. There are no "\n" in the String
+                        + "a*****" // 0
+                        + "*b****" // 1
+                        + "**c***" // 2
+                        + "***d*e*" // 3
+                        + "*****" // 4
+                        + "*****" // 5
+                        + "*****" // 6
+                        + "*****" // 7
+                        + "*****" // 8
+                        + "*****" // 9
+                , new StarSpreadsheetExporter(sheet).export());
     }
 }
