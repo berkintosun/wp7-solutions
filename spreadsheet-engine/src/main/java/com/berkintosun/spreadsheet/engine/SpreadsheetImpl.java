@@ -36,7 +36,7 @@ public class SpreadsheetImpl implements Spreadsheet {
     @Override
     public void put(int row, int col, String val) {
         isOutbound(row, col);
-        cells[row][col] = val;
+        cells[row][col] = valueProcessor.preProcess(val);
     }
 
     @Override

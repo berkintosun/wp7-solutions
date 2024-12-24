@@ -37,4 +37,13 @@ public class ValueProcessor {
 
         return isInteger ? ValueType.INTEGER : ValueType.STRING;
     }
+
+    public String preProcess(String value){
+        String trimmedStr = value.trim();
+        
+        if(getValueType(trimmedStr) == ValueType.INTEGER){
+            return trimmedStr;
+        }
+        return value;
+    }
 }
