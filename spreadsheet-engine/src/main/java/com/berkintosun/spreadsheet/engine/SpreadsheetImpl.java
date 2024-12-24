@@ -1,6 +1,8 @@
 package com.berkintosun.spreadsheet.engine;
 
 import com.berkintosun.spreadsheet.api.Spreadsheet;
+import com.berkintosun.spreadsheet.api.ValueType;
+import com.berkintosun.spreadsheet.engine.processor.ValueProcessor;
 
 public class SpreadsheetImpl implements Spreadsheet {
     private final int rowLimit;
@@ -8,10 +10,13 @@ public class SpreadsheetImpl implements Spreadsheet {
 
     private final String[][] cells;
 
+    private final ValueProcessor valueProcessor;
+
     SpreadsheetImpl(int row, int col, boolean initializeEmpty) {
         rowLimit = row;
         colLimit = col;
         cells = new String[rowLimit][colLimit];
+        valueProcessor = new ValueProcessor(this);
 
         if (initializeEmpty) {
             for (int i = 0; i < rowLimit; i++) {
@@ -32,6 +37,11 @@ public class SpreadsheetImpl implements Spreadsheet {
     public void put(int row, int col, String val) {
         isOutbound(row, col);
         cells[row][col] = val;
+    }
+
+    @Override
+    public ValueType getValueType(int row, int col) {
+        return valueProcessor.getValueType(get(row, col));
     }
 
     private void isOutbound(int row, int col) {
