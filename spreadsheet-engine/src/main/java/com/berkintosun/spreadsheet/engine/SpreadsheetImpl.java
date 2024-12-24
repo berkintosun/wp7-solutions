@@ -3,20 +3,43 @@ package com.berkintosun.spreadsheet.engine;
 import com.berkintosun.spreadsheet.api.Spreadsheet;
 
 public class SpreadsheetImpl implements Spreadsheet {
-    private final int row;
-    private final int col;
+    private final int rowLimit;
+    private final int colLimit;
 
-    SpreadsheetImpl(int row, int col) {
-        this.row = row;
-        this.col = col;
+    private final String[][] cells;
+
+    SpreadsheetImpl(int row, int col, boolean initializeEmpty) {
+        rowLimit = row;
+        colLimit = col;
+        cells = new String[rowLimit][colLimit];
+
+        if (initializeEmpty) {
+            for (int i = 0; i < rowLimit; i++) {
+                for (int j = 0; j < colLimit; j++) {
+                    cells[i][j] = "";
+                }
+            }
+        }
     }
 
     @Override
     public String get(int row, int col) {
-        return "";
+        isOutbound(row, col);
+        return cells[row][col] != null ? cells[row][col] : "";
     }
 
     @Override
     public void put(int row, int col, String val) {
+        isOutbound(row, col);
+        cells[row][col] = val;
+    }
+
+    private void isOutbound(int row, int col) {
+        if (row < 0 || row >= rowLimit || col < 0 || col >= colLimit) {
+            throw new IndexOutOfBoundsException(
+                    String.format("Provided indexes (%s,%s) should be in range of %s,%s",
+                            row, col, rowLimit, colLimit)
+            );
+        }
     }
 }

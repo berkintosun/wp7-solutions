@@ -15,6 +15,8 @@ public class Question {
     public void setup() {
         int rows = 10;
         int columns = 5;
+        //QUESTION: Why use implementation directly in this test instead of an interface
+        // as the name hints that there must be an interface for it?
         sheet = Office.newSpreadsheet(rows, columns);
     }
 
