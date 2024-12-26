@@ -24,10 +24,7 @@ public class DependencyResolver {
 
     public String resolveAndPrint(String filePath)
             throws IOException, JsonParseException, CircularDependencyException {
-        StringBuilder content = fileReader.readFile(filePath);
-        JsonParser parser = new JsonParser(content);
-        Map<String, List<String>> dependencyMap = parser.parse();
-        List<GraphNode> resolvedGraph = graphBuilder.buildGraph(dependencyMap);
+        List<GraphNode> resolvedGraph = resolve(filePath);
         return graphPrinter.print(resolvedGraph);
     }
 
