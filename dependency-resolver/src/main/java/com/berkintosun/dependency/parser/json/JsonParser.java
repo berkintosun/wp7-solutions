@@ -21,7 +21,7 @@ public class JsonParser {
         if (!consume('{')) {
             throw new JsonParseException("Expected '{' at the start of JSON");
         }
-        Boolean isNewElement = peek() != '}';
+        boolean isNewElement = peek() != '}';
         Map<String, List<String>> result = new HashMap<>();
         while (position < input.length() && isNewElement) {
             skipWhitespace();
