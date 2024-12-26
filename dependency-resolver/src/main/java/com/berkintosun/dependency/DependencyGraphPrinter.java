@@ -7,6 +7,28 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * The {@code DependencyGraphPrinter} class is responsible for generating a readable,
+ * tree-like representation of a dependency graph. It formats the output in a way that clearly
+ * shows the hierarchy and relationships between packages and their dependencies.
+ * <p>
+ * This class works with a list of {@link GraphNode} objects, and it transforms
+ * the dependency graph into a nicely indented, readable format and also prettier.
+ * The result and the dependencies will be sorted by alphabetical order.
+ * </p>
+ * <p>
+ * Example of the formatted output:
+ * </p>
+ * <pre>
+ * pkg1
+ * ├─ pkg2
+ * │  └─ pkg3
+ * └─ pkg3
+ * pkg2
+ * └─ pkg3
+ * pkg3
+ * </pre>
+ */
 public class DependencyGraphPrinter {
     StringBuilder result;
     Map<String, List<String>> dependencyList;

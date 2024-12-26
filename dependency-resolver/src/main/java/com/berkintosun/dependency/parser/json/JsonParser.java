@@ -7,6 +7,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * The {@code JsonParser} class is designed to parse JSON strings where each key represents
+ * a package, and the corresponding value is an array of strings representing the dependencies
+ * of that package.
+ * <p>
+ * The parser supports JSON objects with string arrays as values and does not support
+ * JSON arrays or other JSON types at the top level.
+ * </p>
+ */
 public class JsonParser {
     private final StringBuilder input;
     private int position;
@@ -16,6 +25,13 @@ public class JsonParser {
         this.position = 0;
     }
 
+    /**
+     * Parses the JSON input and returns a {@link Map} where the keys are package names
+     * and the values are lists of dependencies for each package.
+     *
+     * @return A {@link Map} of package dependencies.
+     * @throws JsonParseException if the JSON input is invalid or contains unsupported structures.
+     */
     public Map<String, List<String>> parse() throws JsonParseException {
         skipWhitespace();
         if (!consume('{')) {

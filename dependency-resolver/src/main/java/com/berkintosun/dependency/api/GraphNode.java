@@ -4,6 +4,15 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * The {@code GraphNode} class represents a node in a dependency graph.
+ * Each node has a name, a set of outgoing edges and an in-degree
+ * representing the number of incoming edges.
+ * <p>
+ * This class is primarily used to model and manipulate nodes in a directed graph structure,
+ * where edges represent dependencies between nodes.
+ * </p>
+ */
 public class GraphNode {
     private final String name;
     private final Set<GraphNode> outEdges;
