@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  dependency-resolver:
+    image: gradle:8.12-jdk21-alpine
+    container_name: dependency-resolver
+    working_dir: /app
+    volumes:
+      - ./dependency-resolver:/app
+    entrypoint: >
+      sh -c "
+      gradle clean build test && 
+      cp build/libs/*.jar /app && 
+      tail -f /dev/null"
+
+  duplicate-finder:
+    image: gradle:8.12-jdk21-alpine
+    container_name: duplicate-finder
+    working_dir: /app
+    volumes:
+      - ./duplicate-finder:/app
+    entrypoint: >
+      sh -c "
+      gradle clean build test && 
+      cp build/libs/*.jar /app && 
+      tail -f /dev/null"
+
+  spreadsheet-engine:
+    image: gradle:8.12-jdk21-alpine
+    container_name: spreadsheet-engine
+    working_dir: /app
+    volumes:
+      - ./spreadsheet-engine:/app
+    entrypoint: >
+      sh -c "
+      gradle clean build test && 
+      cp build/libs/*.jar /app && 
+      tail -f /dev/null"
