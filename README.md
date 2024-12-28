@@ -9,6 +9,7 @@ This document provides an overview of the tasks implemented for this project, de
 - Assumptions are explicitly stated for any ambiguous instructions.
 - The project is published on a Git repository for the review purposes. Access to the repository will be restricted whenever requested.
 - In commits, mentioned the task number that the commit belongs to.
+- I did not create PR for each task as I was worried of confusing the reviewer but in my opinion separate branch and PR approach would be cleaner. 
 ---
 ## Task Specific Descriptions
 
@@ -38,7 +39,6 @@ if they would like to execute specific command through an environment that conta
 
 Task-1 is also support application plugin of gradle and you can run using `gradle run --args "b a c c e a c d c d"`
 or `docker compose exec duplicate-finder gradle run --args "b a c c e a c d c d"`
----
 
 Build and test using Docker Compose as described above, or manually using Gradle (or Gradle Wrapper):
 
