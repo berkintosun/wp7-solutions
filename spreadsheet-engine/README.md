@@ -16,7 +16,7 @@ Developed a simple spreadsheet engine that passes a predefined set of tests. The
 - For passing the test cases, we actually do not need to initialize cells with an empty string `""` and I believe that approach reduces the performance of the engine.
 - I added a flag `INITIALIZE_EMPTY` to allow users to skip the initializing cells with `""` and handle the null values as empty strings.
 
-exporter outputs in the tests were a bit weird to me as we would have string values more than the amount of column than we have.
+Exporter outputs in the tests were a bit weird to me as we would have string values more than the amount of column than we have.
 I assume the purpose is to use the dash and star as delimiter but still why would we need delimiter at the end of the last cell as well.
 
 ### Testing

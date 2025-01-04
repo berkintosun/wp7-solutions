@@ -37,7 +37,7 @@ This will create clean build and run the tests & copy the jar to the task folder
 Docker containers intentionally kept running after build process is done, in order to allow users to be able to run `docker compose exec`
 if they would like to execute specific command through an environment that contains Java 21 & Gradle 8.1
 
-Task-1 is also support application plugin of gradle and you can run using `gradle run --args "b a c c e a c d c d"`
+Task-1 does also support application plugin of gradle and you can run using `gradle run --args "b a c c e a c d c d"`
 or `docker compose exec duplicate-finder gradle run --args "b a c c e a c d c d"`
 
 Build and test using Docker Compose as described above, or manually using Gradle (or Gradle Wrapper):

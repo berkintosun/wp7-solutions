@@ -50,14 +50,14 @@ class DuplicateFinderTest {
     @MethodSource("provideDuplicateFinders")
     @DisplayName("Test with multiple duplicates should return all duplicates with respect to input order")
     void testMultipleDuplicates(DuplicateFinder<List<String>> finder) {
-        List<String> input = Arrays.asList("z", "x", "z", "x", "y", "y");
+        List<String> input = Arrays.asList("z", "x", "y", "y", "x", "z");
         List<String> expected = Arrays.asList("z", "x", "y");
         assertEquals(expected, finder.findDuplicates(input));
     }
 
     @ParameterizedTest
     @MethodSource("provideDuplicateFinders")
-    @DisplayName("Test with empty array should return empty")
+    @DisplayName("Test with empty list should return empty")
     void testEmptyArray(DuplicateFinder<List<String>> finder) {
         List<String> input = List.of();
         assertTrue(finder.findDuplicates(input).isEmpty());
@@ -65,7 +65,7 @@ class DuplicateFinderTest {
 
     @ParameterizedTest
     @MethodSource("provideDuplicateFinders")
-    @DisplayName("Test with null array should throw exception")
+    @DisplayName("Test with null list should throw exception")
     void testNullArray(DuplicateFinder<List<String>> finder) {
         assertThrows(IllegalArgumentException.class, () -> finder.findDuplicates(null));
     }
